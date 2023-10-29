@@ -1,31 +1,32 @@
-# !/usr/bin/python3?
-from sys import argv
+#!/usr/bin/python3
+# library to get arguments
+import sys
 
-def _fact(vall):
-    """"print a simple descomposition of an integer > 1"""
 
-    s = 2
+# fn unpack number factorial
+def fc():
+    """
+    function fc to search file to convert number and format n=p*q
+    """
+    try:
+        revfile = sys.argv[1]
+        with open(revfile) as f:
+            for revnumber in f:
+                revnumber = int(revnumber)
+                if revnumber % 2 == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // 2, 2))
+                        continue
+                i = 3
+                while i < revnumber // 2:
+                    if revnumber % i == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // i, i))
+                        break
+                    i = i + 2
+                if i == (revnumber // 2) + 1:
+                    print("{}={}*{}".format(revnumber, revnumber, 1))
+    except (IndexError):
+        pass
 
-    if (vall < 2):
-        return
-    print()
-    print(vall, "<- value-bef")
-    while vall % s:
-        s += 1
-    print("{:.0f}={:.0f}*{:.0f}".format(vall, vall / s, s))
-    print(vall, "<- value-aft")
-    print()
 
-if len(argv) != 2:
-    exit()
-
-try:
-    with open(argv[1]) as file:
-        Line = file.readline()
-
-        while Line != "":
-            value = int(Line.split('\n')[0])
-            _fact(value)
-            Line = file.readline()
-except:
-    pass
+# autostart
+fc()
